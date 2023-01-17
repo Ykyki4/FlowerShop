@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Flower Shop</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Unbounded:wght@700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">	
+</head>
+<body>
+	<div class="mainBg">
+		<header id="header">
+			<div class="container">
+				<div class="header ficb">
+					<a href="/"><img src="img/logo.svg" alt="logo" class="logo"></a>
+					<nav>
+						<ul class="menu ficc">
+							<li class="menu__item"><a href="#" class="menu__item_link">Каталог</a></li>
+							<li class="menu__item"><a href="#" class="menu__item_link">Рекомендации</a></li>
+							<li class="menu__item"><a href="#" class="menu__item_link">Контакты</a></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</header>
+		<section id="banner">
+			<div class="container">
+				<div class="banner">
+					<div class="banner__block">
+						<h1 class="banner__title">Мастерская цветов</h1>
+						<p class="banner__text">Подберем для вас букет за два шага, который идеально подойдет под вашу ситуацию</p>
+						<button class="btn banner__btn">Подобрать букет</button>
+					</div>
+					<img src="img/bannerImg.png" alt="banner Img" class="banner__img">
+				</div>
+			</div>
+		</section>
+	</div>
+	<section id="recommended">
+		<div class="container">
+			<div class="recommended p100">
+				<div class="title">Рекомендуем</div>
+				<div class="recommended__elems ficb">
+					<div class="recommended__block recommended__block_first">
+						<div class="recommended__block_elems ficb">
+							<span class="recommended__block_intro">Летнее утро</span>
+							<span class="recommended__block_price">3 600 руб</span>
+						</div>
+					</div>
+					<div class="recommended__block recommended__block_sec">
+						<div class="recommended__block_elems ficb">
+							<span class="recommended__block_intro">Зимняя сказка</span>
+							<span class="recommended__block_price">4 100 руб</span>
+						</div>
+					</div>
+					<div class="recommended__block recommended__block_thr">
+						<div class="recommended__block_elems ficb">
+							<span class="recommended__block_intro">Нежный</span>
+							<span class="recommended__block_price">2 900 руб</span>
+						</div>
+					</div>
+				</div>
+				<button class="btn recommended__btn">Показать всю коллекцию</button>
+			</div>
+		</div>
+	</section>
+	<section id="contacts">
+		<div class="container">
+			<div class="contacts">
+				<div class="title">Как нас найти</div>
+				<div class="contacts__elems ficb">
+					<div class="contacts__block">
+						<div class="contacts__block_item ficc">
+							<div class="contacts__block_intro">ул. Пушкинская, 69</div>
+							<a href="tel:89111744460" class="contacts__block_tel">8 (911) 17 44 460</a>
+						</div>
+						<div class="contacts__block_item ficc">
+							<div class="contacts__block_intro">ул. Жукова, 13</div>
+							<a href="tel:89112855571" class="contacts__block_tel">8 (911) 28 55 571</a>
+						</div>
+						<div class="contacts__block_item ficc">
+							<div class="contacts__block_intro">ул. Красная, 384</div>
+							<a href="tel:89113966682" class="contacts__block_tel">8 (911) 39 66 682</a>
+						</div>
+					</div>
+					<img src="img/contactsImg.jpg" alt="contactsImg" class="contacts__img">
+					<div class="contacts__map">
+						<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Af39d7a7f1829359b6ffe21ab6356fcaeace17d528d6522dba8772f885c8b1a7d&amp;width=398&amp;height=316&amp;lang=ru_RU&amp;scroll=true"></script>
+					</div>					
+				</div>
+				<button class="btn contacts__btn">Заказать доставку</button>
+			</div>
+		</div>
+	</section>
+	<section id="consultation">
+		<div class="container">
+			<div class="consultation">
+				<div class="title consultation__title">Оставьте заявку на консультацию</div>
+				<form action="#" class="consultation__form">
+					<input type="text" name="fname" class="consultation__form_input" placeholder="Введите Имя" required>
+					<input type="text" name="tel" class="consultation__form_input" placeholder="+ 7 (999) 000 00 00" required>
+					<button type="submit" class="consultation__form_btn">Отправить</button>
+				</form>
+			</div>
+		</div>
+	</section>
+	<footer id="footer">
+		<div class="container">
+			<div class="footer">
+				<a href="/"><img src="img/logo.svg" alt="logo" class="logo footer__logo"></a>
+				<nav>
+					<ul class="menu footer__menu ficc">
+						<li class="menu__item"><a href="#" class="menu__item_link">Каталог</a></li>
+						<li class="menu__item"><a href="#" class="menu__item_link">Рекомендации</a></li>
+						<li class="menu__item"><a href="#" class="menu__item_link">Контакты</a></li>
+					</ul>
+				</nav>
+				<hr class="line"></hr>
+				<a href="#" class="footer__poli">Политика конфиденциальности</a>
+				<p class="footer_cop">©️2022. FlowerShop. Все права защищены</p>
+			</div>
+		</div>
+	</footer>
+</body>
+</html>

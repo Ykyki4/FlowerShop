@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Flower Shop</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Unbounded:wght@700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">	
+</head>
+<body>
+	<header id="header">
+		<div class="container">
+			<div class="header ficb">
+				<a href="/"><img src="img/logo.svg" alt="logo" class="logo"></a>
+				<nav>
+					<ul class="menu ficc">
+						<li class="menu__item"><a href="#" class="menu__item_link">Каталог</a></li>
+						<li class="menu__item"><a href="#" class="menu__item_link">Рекомендации</a></li>
+						<li class="menu__item"><a href="#" class="menu__item_link">Контакты</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</header>
+	<section id="orderStep">
+		<div class="container">
+			<div class="order orderStep">
+				<div class="order__block">
+					<div class="order_items">
+						<div class="title">Оплата</div>
+						<form action="#" class="order__form orderStep_form">
+							<div class="order__form_block">
+								<div class="order__form_items">
+									<div class="order__form_intro">номер карты</div>
+									<input type="text" name="cardNum" class="order__form_input orderStep_form_input" placeholder="Введите номер" required>
+									<div class="order__form_item fic">
+										<input type="text" name="cardMm" class="order__form_input orderStep_form_input" placeholder="ММ" required>
+										<input type="text" name="cardGg" class="order__form_input orderStep_form_input" placeholder="ГГ" required>
+									</div>
+									
+									<input type="text" name="cardFname" class="order__form_input orderStep_form_input" placeholder="Имя владельца" required>
+									<input type="text" name="cardCvc" class="order__form_input orderStep_form_input" placeholder="CVC" required>
+								</div>
+								<div class="order__form_items">
+									<div class="order__form_intro">Ваш e-mail (необязательно)</div>
+									<input type="email" name="mail" class="order__form_input orderStep_form_input" placeholder="pochta@mail.ru">
+								</div>
+							</div>
+							<div class="order__form_line"></div>
+							<div class="order__form_btns ficb">
+								<button class="btn order__form_pay">Оплатить</button>
+								<button class="btn order__form_btn">Назад</button>
+							</div>
+						</form>
+					</div>
+					<!-- <div class="blockImgHiden"></div> -->
+				</div>
+			</div>
+		</div>
+		<img src="img/orderImg.jpg" alt="orderImg" class="order__img">
+	</section>
+	<footer id="footer">
+		<div class="container">
+			<div class="footer">
+				<a href="/"><img src="img/logo.svg" alt="logo" class="logo footer__logo"></a>
+				<nav>
+					<ul class="menu footer__menu ficc">
+						<li class="menu__item"><a href="#" class="menu__item_link">Каталог</a></li>
+						<li class="menu__item"><a href="#" class="menu__item_link">Рекомендации</a></li>
+						<li class="menu__item"><a href="#" class="menu__item_link">Контакты</a></li>
+					</ul>
+				</nav>
+				<hr class="line"></hr>
+				<a href="#" class="footer__poli">Политика конфиденциальности</a>
+				<p class="footer_cop">©️2022. FlowerShop. Все права защищены</p>
+			</div>
+		</div>
+	</footer>
+</body>
+</html>

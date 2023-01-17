@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Flower Shop</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Unbounded:wght@700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">	
+</head>
+<body>
+	<header id="header">
+		<div class="container">
+			<div class="header ficb">
+				<a href="/"><img src="img/logo.svg" alt="logo" class="logo"></a>
+				<nav>
+					<ul class="menu ficc">
+						<li class="menu__item"><a href="#" class="menu__item_link">Каталог</a></li>
+						<li class="menu__item"><a href="#" class="menu__item_link">Рекомендации</a></li>
+						<li class="menu__item"><a href="#" class="menu__item_link">Контакты</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</header>
+	<section id="order">
+		<div class="container">
+			<div class="order">
+				<div class="order__block">
+					<div class="order_items">
+						<div class="title">Оформление доставки</div>
+						<form action="#" class="order__form">
+							<div class="order__form_block ficb">
+								<input type="text" name="fname" class="order__form_input" placeholder="Введите Имя" required>
+								<input type="text" name="tel" class="order__form_input" placeholder="+ 7 (999) 000 00 00" required>
+								<input type="text" name="adres" class="order__form_input" placeholder="Адрес доставки" required>
+							</div>
+							<div class="order__form_btns fic">
+								<div class="order__form_radioBlock ">
+									<input type="radio" name="orderTime" id="radio1" value="Как можно скорее" class="order__form_radio" />
+									<label for="radio1" class="radioLable">Как можно скорее</label>
+								</div>
+								<div class="order__form_radioBlock">
+									<input type="radio" name="orderTime" id="radio2" value="с 10:00 до 12:00" class="order__form_radio" />
+									<label for="radio2" class="radioLable">с 10:00 до 12:00</label>
+								</div>
+								<div class="order__form_radioBlock">
+									<input type="radio" name="orderTime" id="radio3" value="с 12:00 до 14:00" class="order__form_radio" />
+									<label for="radio3" class="radioLable">с 12:00 до 14:00</label>
+								</div>
+								<div class="order__form_radioBlock">
+									<input type="radio" name="orderTime" id="radio4" value="с 14:00 до 16:00" class="order__form_radio" />
+									<label for="radio4" class="radioLable">с 14:00 до 16:00</label>
+								</div>
+								<div class="order__form_radioBlock">
+									<input type="radio" name="orderTime" id="radio5" value="с 16:00 до 18:00" class="order__form_radio" />
+									<label for="radio5" class="radioLable">с 16:00 до 18:00</label>
+								</div>
+								<div class="order__form_radioBlock">
+									<input type="radio" name="orderTime" id="radio6" value="с 18:00 до 20:00" class="order__form_radio" />
+									<label for="radio6" class="radioLable">с 18:00 до 20:00</label>
+								</div>
+								
+							</div>
+							<div class="order__form_line"></div>
+							<div class="order__form_btns ficb">
+								<button class="btn order__form_pay">Оплатить</button>
+								<button class="btn order__form_btn">Назад</button>
+							</div>
+						</form>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<img src="img/orderImg.jpg" alt="orderImg" class="order__img">
+	</section>
+	<footer id="footer">
+		<div class="container">
+			<div class="footer">
+				<a href="/"><img src="img/logo.svg" alt="logo" class="logo footer__logo"></a>
+				<nav>
+					<ul class="menu footer__menu ficc">
+						<li class="menu__item"><a href="#" class="menu__item_link">Каталог</a></li>
+						<li class="menu__item"><a href="#" class="menu__item_link">Рекомендации</a></li>
+						<li class="menu__item"><a href="#" class="menu__item_link">Контакты</a></li>
+					</ul>
+				</nav>
+				<hr class="line"></hr>
+				<a href="#" class="footer__poli">Политика конфиденциальности</a>
+				<p class="footer_cop">©️2022. FlowerShop. Все права защищены</p>
+			</div>
+		</div>
+	</footer>
+	<script>
+		document.querySelector('input[type=radio]').onclick = function(e) {
+			// e.preventDefault()
+			// console.log(e.target)
+			console.log(e.target.value)
+		}
+	</script>
+</body>
+</html>

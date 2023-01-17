@@ -480,6 +480,14 @@ margin-bottom: 30px;
 	position: absolute;
 	background: #17CF97;
 	border-radius: 10px;
+	width: 100%;
+	height: 8px;
+}
+
+.quiz__progress_lineInactive {;
+	position: absolute;
+	background: #17CF97;
+	border-radius: 10px;
 	width: 8px;
 	height: 8px;
 }

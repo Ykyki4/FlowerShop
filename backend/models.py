@@ -40,7 +40,7 @@ class Bouquet(models.Model):
         blank=True,
     )
     width = models.IntegerField(
-        'Высота',
+        'Ширина',
         null=True,
         blank=True,
     )

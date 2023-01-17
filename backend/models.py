@@ -106,3 +106,10 @@ class Consultation(models.Model):
         'Заметки по клиенту',
         blank=True,
     )
+
+    class Meta:
+        verbose_name = 'Консультация'
+        verbose_name_plural = 'Консультации'
+
+    def __str__(self):
+        return f'{self.client_name} в {self.created_at}'

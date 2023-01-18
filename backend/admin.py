@@ -4,7 +4,7 @@ from .models import Bouquet, Order, Consultation
 
 @admin.register(Bouquet)
 class BouquetAdmin(admin.ModelAdmin):
-    list_display = ('title', 'price', 'reason')
+    list_display = ('title', 'price', 'reason', 'description')
 
 
 @admin.register(Order)
@@ -16,4 +16,4 @@ class OrderAdmin(admin.ModelAdmin):
 @admin.register(Consultation)
 class ConsultationAdmin(admin.ModelAdmin):
     list_display = ('client_name', 'phonenumber', 'created_at', 'closed', 'comment')
-    list_editable = ('comment',)
+    list_editable = ('closed', 'comment',)

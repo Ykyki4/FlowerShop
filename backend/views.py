@@ -1,13 +1,19 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from rest_framework.decorators import api_view
 from rest_framework.serializers import ModelSerializer
 
-from backend.models import Bouquet, Order
+from backend.models import Bouquet, Order, Consultation
 
 
 class OrderSerializer(ModelSerializer):
     class Meta:
         model = Order
+
+
+class ConsultationSerializer(ModelSerializer):
+    class Meta:
+        model = Consultation
+        fields = ['client_name', 'phonenumber', ]
 
 
 def index(request):
@@ -49,3 +55,18 @@ def order(request):
 def order_step(request):
     print(request.data)
     return render(request, 'order-step.html')
+
+
+@api_view(['POST'])
+def register_consultation(request):
+    request_payload = request.data
+
+    consultation_serialized = ConsultationSerializer(data=request_payload)
+    consultation_serialized.is_valid(raise_exception=True)
+
+    consultation = Consultation.objects.create(
+        client_name=consultation_serialized.validated_data['client_name'],
+        phonenumber=consultation_serialized.validated_data['phonenumber'],
+    )
+
+    return redirect('index')

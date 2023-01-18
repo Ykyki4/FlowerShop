@@ -9,7 +9,7 @@ class BouquetAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('bouquet', 'client_name', 'phonenumber')
+    list_display = ('bouquet', 'client_name', 'phonenumber', 'address', 'delivery_time', 'payed')
 
 
 @admin.register(Consultation)

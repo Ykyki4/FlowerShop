@@ -15,9 +15,9 @@
 				<a href="/"><img src="{% static 'img/logo.svg' %}" alt="logo" class="logo"></a>
 				<nav>
 					<ul class="menu ficc">
-						<li class="menu__item"><a href="#" class="menu__item_link">Каталог</a></li>
-						<li class="menu__item"><a href="#" class="menu__item_link">Рекомендации</a></li>
-						<li class="menu__item"><a href="#" class="menu__item_link">Контакты</a></li>
+						<li class="menu__item"><a href="{% url 'catalog' %}" class="menu__item_link">Каталог</a></li>
+						<li class="menu__item"><a href="{% url 'index' %}#recommended" class="menu__item_link">Рекомендации</a></li>
+						<li class="menu__item"><a href="{% url 'index' %}#contacts" class="menu__item_link">Контакты</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -33,10 +33,7 @@
 							<span class="card__elems_intro">Описание:</span>
 							<div class="card__items">
 								<p class="card__items_text card__items_text__first">
-									Этот букет передает атмосферу летнего утра в деревне. Букет создан из свежих полевых цветов, собранных в самом сердце природы. В состав букета входит ромашка, пионовидная роза, альстромерия, эустома, веточка эвкалипта, декоративная зелень. Все цветы собраны вручную и аккуратно высушены. 
-								</p>
-								<p class="card__items_text">
-									Букеты из полевых цветов - это не только прекрасный подарок, но и отличный способ выразить свои чувства.
+									{{ bouquet.description }}
 								</p>
 							</div>
 						</div>
@@ -44,22 +41,22 @@
 							<span class="card__elems_intro">Состав:</span>
 							<div class="card__items">
 								<p class="card__items_text card__items_text__first">
-									Альстромерия белая 1 шт., Эустома белая 1 шт, Ромашка 1 шт, Роза пионовидная 1 шт 
+									{{ bouquet.composition }}
 								</p>
 								
 							</div>
 						</div>
 					</div>
-					<img src="{% static 'img/cardImg.jpg' %}" alt="result Img" class="result__block_img">
+					<img src="{{ bouquet.image.url }}" alt="result Img" class="result__block_img">
 					<div class="result__items">
-						<div class="title result__items_title">Летнее утро</div>
-						<div class="result__items_price">3 600 руб</div>
+						<div class="title result__items_title">{{ bouquet.title }}</div>
+						<div class="result__items_price">{{ bouquet.price }} руб</div>
 						<button class="btn result__items_btn">Заказать букет</button>
 						<hr class="result__items_line" />
 						<div class="result__items_intro">Хотите что-то более специальное?</div>
 						<div class="result__items_block">
-							<button class="btn largeBtn result__items_block__btn">Смотреть всю коллекцию</button>
-							<button class="btn largeBtn result__items_block__btn">Заказать консультацию</button>
+							<a href="{% url 'catalog' %}"><button class="btn largeBtn result__items_block__btn">Смотреть всю коллекцию</button></a>
+							<a href="#consultation"><button class="btn largeBtn result__items_block__btn">Заказать консультацию</button></a>
 						</div>
 					</div>
 				</div>	
@@ -112,9 +109,9 @@
 				<a href="/"><img src="{% static 'img/logo.svg' %}" alt="logo" class="logo footer__logo"></a>
 				<nav>
 					<ul class="menu footer__menu ficc">
-						<li class="menu__item"><a href="#" class="menu__item_link">Каталог</a></li>
-						<li class="menu__item"><a href="#" class="menu__item_link">Рекомендации</a></li>
-						<li class="menu__item"><a href="#" class="menu__item_link">Контакты</a></li>
+						<li class="menu__item"><a href="{% url 'catalog' %}" class="menu__item_link">Каталог</a></li>
+						<li class="menu__item"><a href="{% url 'index' %}#recommended" class="menu__item_link">Рекомендации</a></li>
+						<li class="menu__item"><a href="{% url 'index' %}#contacts" class="menu__item_link">Контакты</a></li>
 					</ul>
 				</nav>
 				<hr class="line"></hr>

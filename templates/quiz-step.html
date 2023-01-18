@@ -12,12 +12,12 @@
 	<header id="header">
 		<div class="container">
 			<div class="header ficb">
-				<a href="/"><img src="img/logo.svg" alt="logo" class="logo"></a>
+				<a href="/"><img src="{% static 'img/logo.svg' %}" alt="logo" class="logo"></a>
 				<nav>
 					<ul class="menu ficc">
-						<li class="menu__item"><a href="#" class="menu__item_link">Каталог</a></li>
-						<li class="menu__item"><a href="#" class="menu__item_link">Рекомендации</a></li>
-						<li class="menu__item"><a href="#" class="menu__item_link">Контакты</a></li>
+						<li class="menu__item"><a href="{% url 'catalog' %}" class="menu__item_link">Каталог</a></li>
+						<li class="menu__item"><a href="{% url 'index' %}#recommended" class="menu__item_link">Рекомендации</a></li>
+						<li class="menu__item"><a href="{% url 'index' %}#contacts" class="menu__item_link">Контакты</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -34,13 +34,13 @@
 					<h1 class="quiz__title">На какой бюджет рассчитываете?</h1>
 					<form action="{% url 'result' %}" method="post" class="quiz__elems fic">{% csrf_token %}
 						<button name="price" value="<1000" class="quiz__elem">До 1 000 руб</button>
-						<button name="price" value="1000-5000" class="quiz__elem">1 000 - 5 000 руб</button>
-						<button name="price" value=">5000" class="quiz__elem">от 5 000 руб</button>
+						<button name="price" value="1000" class="quiz__elem">1 000 - 5 000 руб</button>
+						<button name="price" value="5000" class="quiz__elem">от 5 000 руб</button>
 						<button name="price" value="no_matter" class="quiz__elem">Не имеет значения</button>
 					</form>
 					<div class="quiz__progress">
 						<div class="quiz__progress_step">
-							<span class="quiz__progress_num">1</span>
+							<span class="quiz__progress_num">2</span>
 							<span class="quiz__progress_in"> шаг из </span>
 							<span class="quiz__progress_num">2</span>
 						</div>

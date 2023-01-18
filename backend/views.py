@@ -1,7 +1,6 @@
 from django.shortcuts import render
 
-
-reason = ''
+from backend.models import Bouquet
 
 
 def index(request):
@@ -17,12 +16,17 @@ def quiz(request):
 
 
 def quiz_step(request):
-    global reason
-    reason = request.POST['reason']
+    request.session['reason'] = request.POST['reason']
     return render(request, 'quiz-step.html')
 
 
 def result(request):
-    print(reason)
-    print(request.POST['price'])
-    return render(request, 'result.html')
+    if request.method == 'POST':
+        if request.POST['price'] == '<1000':
+            bouquet = Bouquet.objects.filter(price__lt=1000, reason=request.session['reason']).first()
+        else:
+            bouquet = Bouquet.objects.filter(price__gt=request.POST['price'], reason=request.session['reason']).first()
+    else:
+        bouquet = None
+
+    return render(request, 'result.html', {'bouquet': bouquet})

@@ -18,7 +18,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 
-from backend.views import index, catalog, quiz, quiz_step, result
+from backend.views import index, catalog, quiz, quiz_step, result, order, order_step, register_consultation
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,4 +27,7 @@ urlpatterns = [
     path('quiz/', quiz, name='quiz'),
     path('quiz-step/', quiz_step, name='quiz-step'),
     path('result/', result, name='result'),
+    path('order/', order, name='order'),
+    path('order-step/', order_step, name='order-step'),
+    path('register-consultation/', register_consultation, name='register-consultation')
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

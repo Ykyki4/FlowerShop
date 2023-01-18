@@ -29,7 +29,7 @@
 				<div class="order__block">
 					<div class="order_items">
 						<div class="title">Оформление доставки</div>
-						<form action="{% url 'order-step' %}" method="post" class="order__form">
+						<form action="{% url 'order-step' %}" method="post" class="order__form">{% csrf_token %}
 							<div class="order__form_block ficb">
 								<input type="text" name="client_name" class="order__form_input" placeholder="Введите Имя" required>
 								<input type="text" name="phonenumber" class="order__form_input" placeholder="+ 7 (999) 000 00 00" required>
@@ -65,7 +65,7 @@
 							<div class="order__form_line"></div>
 							<div class="order__form_btns ficb">
 								<button class="btn order__form_pay">Оплатить</button>
-								<button class="btn order__form_btn">Назад</button>
+								<a href="{% url 'result' %}"><button type="button" class="btn order__form_btn">Назад</button></a>
 							</div>
 						</form>
 					</div>

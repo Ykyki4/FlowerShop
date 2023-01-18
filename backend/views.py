@@ -8,6 +8,7 @@ from backend.models import Bouquet, Order, Consultation
 class OrderSerializer(ModelSerializer):
     class Meta:
         model = Order
+        fields = ['client_name', 'phonenumber', 'address', 'delivery_time']
 
 
 class ConsultationSerializer(ModelSerializer):
@@ -53,15 +54,23 @@ def order(request):
 
 @api_view(['POST'])
 def order_step(request):
-    print(request.data)
+    order_serialized = OrderSerializer(data=request.data)
+    order_serialized.is_valid(raise_exception=True)
+
+    Order.objects.create(
+        bouquet=Bouquet.objects.get(id=request.session['bouquet_id']),
+        client_name=order_serialized.validated_data['client_name'],
+        phonenumber=order_serialized.validated_data['phonenumber'],
+        address=order_serialized.validated_data['address'],
+        delivery_time=order_serialized.validated_data['delivery_time'],
+    )
+
     return render(request, 'order-step.html')
 
 
 @api_view(['POST'])
 def register_consultation(request):
-    request_payload = request.data
-
-    consultation_serialized = ConsultationSerializer(data=request_payload)
+    consultation_serialized = ConsultationSerializer(data=request.data)
     consultation_serialized.is_valid(raise_exception=True)
 
     consultation = Consultation.objects.create(

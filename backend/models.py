@@ -7,6 +7,15 @@ REASON_TYPE = [
     ('no_reason', 'Без повода'),
 ]
 
+DELIVERY_TIME_CHOICES = [
+    ('ASAP', 'Как можно скорее'),
+    ('10:00-12:00', '10:00-12:00'),
+    ('12:00-14:00', '12:00-14:00'),
+    ('14:00-16:00', '14:00-16:00'),
+    ('16:00-18:00', '16:00-18:00'),
+    ('18:00-20:00', '18:00-20:00'),
+]
+
 
 class Bouquet(models.Model):
     title = models.CharField(
@@ -73,6 +82,17 @@ class Order(models.Model):
         'Номер клиента',
         max_length=20,
     )
+    address = models.CharField(
+        'Адрес доставки',
+        max_length=100,
+    )
+    delivery_time = models.CharField(
+        'Время доставки',
+        max_length=15,
+        choices=DELIVERY_TIME_CHOICES,
+    )
+
+    payed = models.CheckConstraint
 
     class Meta:
         verbose_name = 'Заказ'

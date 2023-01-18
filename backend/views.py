@@ -29,4 +29,14 @@ def result(request):
     else:
         bouquet = None
 
+    request.session['bouquet_id'] = bouquet.id
+
     return render(request, 'result.html', {'bouquet': bouquet})
+
+
+def order(request):
+    return render(request, 'order.html')
+
+
+def order_step(request):
+    return render(request, 'order-step.html')

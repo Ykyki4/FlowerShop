@@ -625,6 +625,7 @@ color: rgba(0, 0, 0, .3);
 	color: #17CF97;
 	border: 1px solid #17CF97;
 	border-radius: 100px;
+	transition: .6s;
 }
 input[type=radio]:checked + label {
 	background: #17CF97;

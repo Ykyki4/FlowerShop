@@ -92,7 +92,10 @@ class Order(models.Model):
         choices=DELIVERY_TIME_CHOICES,
     )
 
-    payed = models.CheckConstraint
+    payed = models.BooleanField(
+        'Оплачено',
+        default=False,
+    )
 
     class Meta:
         verbose_name = 'Заказ'

@@ -1,6 +1,13 @@
 from django.shortcuts import render
+from rest_framework.decorators import api_view
+from rest_framework.serializers import ModelSerializer
 
-from backend.models import Bouquet
+from backend.models import Bouquet, Order
+
+
+class OrderSerializer(ModelSerializer):
+    class Meta:
+        model = Order
 
 
 def index(request):
@@ -27,7 +34,7 @@ def result(request):
         else:
             bouquet = Bouquet.objects.filter(price__gt=request.POST['price'], reason=request.session['reason']).first()
     else:
-        bouquet = None
+        bouquet = Bouquet.objects.get(id=request.session['bouquet_id'])
 
     request.session['bouquet_id'] = bouquet.id
 
@@ -38,5 +45,7 @@ def order(request):
     return render(request, 'order.html')
 
 
+@api_view(['POST'])
 def order_step(request):
+    print(request.data)
     return render(request, 'order-step.html')

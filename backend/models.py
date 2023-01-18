@@ -86,15 +86,25 @@ class Order(models.Model):
         'Адрес доставки',
         max_length=100,
     )
+    delivery_date = models.DateField(
+        'Дата доставки',
+        default=timezone.now,
+    )
     delivery_time = models.CharField(
         'Время доставки',
         max_length=15,
         choices=DELIVERY_TIME_CHOICES,
+        default='ASAP',
     )
-
-    payed = models.BooleanField(
+    is_payed = models.BooleanField(
         'Оплачено',
         default=False,
+        db_index=True,
+    )
+    is_delivered = models.BooleanField(
+        'Доставлено',
+        default=False,
+        db_index=True,
     )
 
     class Meta:
@@ -120,7 +130,7 @@ class Consultation(models.Model):
         default=timezone.now,
         db_index=True,
     )
-    closed = models.BooleanField(
+    is_closed = models.BooleanField(
         'Консультация проведена',
         default=False,
         db_index=True,

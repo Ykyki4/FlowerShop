@@ -11,7 +11,11 @@ class BouquetAdmin(admin.ModelAdmin):
     readonly_fields = ['image_tag',]
 
     def image_tag(self, obj):
-        return format_html('<img src="{}" style="max-height: 100px;"/>'.format(obj.image.url))
+        try:
+            url = obj.image.url
+        except ValueError:
+            url = ''
+        return format_html('<img src="{url}" style="max-height: 100px;"/>', url=url)
 
     image_tag.short_description = 'Картинка'
 

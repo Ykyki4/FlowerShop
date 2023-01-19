@@ -119,6 +119,7 @@ class Order(models.Model):
         verbose_name='Констультация',
         on_delete=models.PROTECT,
         blank=True,
+        null=True,
     )
 
     class Meta:

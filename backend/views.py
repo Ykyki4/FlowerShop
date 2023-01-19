@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from rest_framework.serializers import ModelSerializer
+from yookassa import Payment as YooPayment
 
 from backend.models import Bouquet, Order, Consultation
 
@@ -53,19 +55,50 @@ def order(request):
 
 
 @api_view(['POST'])
-def order_step(request):
+def order_register(request):
+    bouquet = Bouquet.objects.get(id=request.session['bouquet_id'])
+
     order_serialized = OrderSerializer(data=request.data)
     order_serialized.is_valid(raise_exception=True)
 
-    Order.objects.create(
-        bouquet=Bouquet.objects.get(id=request.session['bouquet_id']),
+    order_created = Order.objects.create(
+        bouquet=bouquet,
         client_name=order_serialized.validated_data['client_name'],
         phonenumber=order_serialized.validated_data['phonenumber'],
         address=order_serialized.validated_data['address'],
         delivery_time=order_serialized.validated_data['delivery_time'],
     )
 
-    return render(request, 'backend/order-step.html')
+    yoo_payment = YooPayment.create({
+        'amount': {
+            'value': f'{bouquet.price}',
+            'currency': 'RUB'
+        },
+        'confirmation': {
+            'type': 'redirect',
+            'return_url': request.META.get('HTTP_REFERER')
+        },
+        'capture': True,
+        'description': f'Заказ №{order_created.id}'
+    }, order_created.id)
+
+    return redirect(yoo_payment.confirmation.confirmation_url)
+
+
+@api_view(['POST'])
+def payment_update(request):
+    event = request.data.get('event')
+    if event == 'payment.succeeded':
+        status = True
+    elif event == 'payment.canceled':
+        status = False
+    elif event == 'payment.waiting_for_capture':
+        status = True
+    else:
+        return Response(status=403)
+    payment_order = Order.objects.get(id=request.data['object']['id'])
+    payment_order.is_payed = status
+    return Response()
 
 
 @api_view(['POST'])

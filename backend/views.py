@@ -18,20 +18,20 @@ class ConsultationSerializer(ModelSerializer):
 
 
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'backend/index.html')
 
 
 def catalog(request):
-    return render(request, 'catalog.html')
+    return render(request, 'backend/catalog.html')
 
 
 def quiz(request):
-    return render(request, 'quiz.html')
+    return render(request, 'backend/quiz.html')
 
 
 def quiz_step(request):
     request.session['reason'] = request.POST['reason']
-    return render(request, 'quiz-step.html')
+    return render(request, 'backend/quiz-step.html')
 
 
 def result(request):
@@ -45,11 +45,11 @@ def result(request):
 
     request.session['bouquet_id'] = bouquet.id
 
-    return render(request, 'result.html', {'bouquet': bouquet})
+    return render(request, 'backend/result.html', {'bouquet': bouquet})
 
 
 def order(request):
-    return render(request, 'order.html')
+    return render(request, 'backend/order.html')
 
 
 @api_view(['POST'])
@@ -65,7 +65,7 @@ def order_step(request):
         delivery_time=order_serialized.validated_data['delivery_time'],
     )
 
-    return render(request, 'order-step.html')
+    return render(request, 'backend/order-step.html')
 
 
 @api_view(['POST'])

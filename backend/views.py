@@ -1,3 +1,5 @@
+import uuid
+
 from django.shortcuts import render, redirect
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -45,7 +47,7 @@ def result(request):
         if price == '<1000':
             bouquet = Bouquet.objects.filter(price__lt=1000, reason=reason).order_by('-price').first()
         elif price == '1000-5000':
-            bouquet = Bouquet.objects.filter(price__get=1000, price__lt=5000, reason=reason).order_by('-price').first()
+            bouquet = Bouquet.objects.filter(price__gt=1000, price__lt=5000, reason=reason).order_by('-price').first()
         elif price == 'no_matter':
             bouquet = Bouquet.objects.filter(reason=reason).order_by('-price').first()
         else:
@@ -88,7 +90,7 @@ def order_register(request):
         },
         'capture': True,
         'description': f'Заказ №{order_created.id}'
-    }, order_created.id)
+    }, str(uuid.uuid4()))
 
     order_created.yookassa_payment_id = yoo_payment.id
     order_created.save()

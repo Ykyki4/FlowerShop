@@ -6,13 +6,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Flower Shop</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Unbounded:wght@700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="{% static 'css/main.css' %}">
+	<link rel="stylesheet" href="{% static 'backend/css/main.css' %}">
 </head>
 <body>
 	<header id="header">
 		<div class="container">
 			<div class="header ficb">
-				<a href="/"><img src="{% static 'img/logo.svg' %}" alt="logo" class="logo"></a>
+				<a href="/"><img src="{% static 'backend/img/logo.svg' %}" alt="logo" class="logo"></a>
 				<nav>
 					<ul class="menu ficc">
 						<li class="menu__item"><a href="{% url 'catalog' %}" class="menu__item_link">Каталог</a></li>
@@ -27,25 +27,24 @@
 		<div class="container">
 			<div class="quiz">
 				<div class="quiz__back ">
-					<a href="#" class="quiz__back_link fic"><img src="{% static 'img/arrow-left.svg' %}" alt="arrow-left" class="arrowLeft">
+					<a href="#" class="quiz__back_link fic"><img src="{% static 'backend/img/arrow-left.svg' %}" alt="arrow-left" class="arrowLeft">
 					<span class="quiz__back_intro">Назад</span></a>
 				</div>
 				<div class="quiz__block">
-					<h1 class="quiz__title">На какой бюджет рассчитываете?</h1>
-					<form action="{% url 'result' %}" method="post" class="quiz__elems fic">{% csrf_token %}
-						<button name="price" value="<1000" class="quiz__elem">До 1 000 руб</button>
-						<button name="price" value="1000" class="quiz__elem">1 000 - 5 000 руб</button>
-						<button name="price" value="5000" class="quiz__elem">от 5 000 руб</button>
-						<button name="price" value="no_matter" class="quiz__elem">Не имеет значения</button>
+					<h1 class="quiz__title">К какому событию нужен букет?</h1>
+					<form action="{% url 'quiz-step' %}" method="post" class="quiz__elems fic">{% csrf_token %}
+						<button name="reason" value="wedding" class="quiz__elem">Свадьба</button>
+						<button name="reason" value="birthday" class="quiz__elem">День рождения</button>
+						<button name="reason" value="no_reason" class="quiz__elem">Без повода</button>
 					</form>
 					<div class="quiz__progress">
 						<div class="quiz__progress_step">
-							<span class="quiz__progress_num">2</span>
+							<span class="quiz__progress_num">1</span>
 							<span class="quiz__progress_in"> шаг из </span>
 							<span class="quiz__progress_num">2</span>
 						</div>
 						<div class="quiz__progress_line">
-							<div class="quiz__progress_lineActive"></div>
+							<div class="quiz__progress_lineInactive"></div>
 						</div>
 					</div>
 				</div>

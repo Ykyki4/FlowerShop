@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from rest_framework.serializers import ModelSerializer
 from yookassa import Payment as YooPayment
 
@@ -79,9 +80,25 @@ def order_register(request):
         },
         'capture': True,
         'description': f'Заказ №{order_created.id}'
-    })
+    }, order_created.id)
 
     return redirect(yoo_payment.confirmation.confirmation_url)
+
+
+@api_view(['POST'])
+def payment_update(request):
+    event = request.data.get('event')
+    if event == 'payment.succeeded':
+        status = True
+    elif event == 'payment.canceled':
+        status = False
+    elif event == 'payment.waiting_for_capture':
+        status = True
+    else:
+        return Response(status=403)
+    payment_order = Order.objects.get(id=request.data['object']['id'])
+    payment_order.is_payed = status
+    return Response()
 
 
 @api_view(['POST'])

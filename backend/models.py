@@ -16,6 +16,13 @@ DELIVERY_TIME_CHOICES = [
     ('18:00-20:00', '18:00-20:00'),
 ]
 
+CONSULTATION_STATUS = [
+    ('waiting', 'Ожидает'),
+    ('in progress', 'В работе'),
+    ('rejection', 'Отказ от заказа'),
+    ('done', 'Заказ оформлен'),
+]
+
 
 class Bouquet(models.Model):
     title = models.CharField(
@@ -116,6 +123,13 @@ class Order(models.Model):
 
 
 class Consultation(models.Model):
+    status = models.CharField(
+        'Статус работы',
+        max_length=20,
+        choices=CONSULTATION_STATUS,
+        default='waiting',
+        db_index=True,
+    )
     client_name = models.CharField(
         'ФИО клиента',
         max_length=200,
@@ -130,15 +144,11 @@ class Consultation(models.Model):
         default=timezone.now,
         db_index=True,
     )
-    is_closed = models.BooleanField(
-        'Консультация проведена',
-        default=False,
-        db_index=True,
-    )
     comment = models.TextField(
         'Заметки по клиенту',
         blank=True,
     )
+
 
     class Meta:
         verbose_name = 'Консультация'

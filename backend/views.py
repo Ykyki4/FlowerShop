@@ -44,6 +44,8 @@ def result(request):
         price = request.data['price']
         if price == '<1000':
             bouquet = Bouquet.objects.filter(price__lt=1000, reason=reason).order_by('-price').first()
+        elif price == '1000-5000':
+            bouquet = Bouquet.objects.filter(price__get=1000, price__lt=5000, reason=reason).order_by('-price').first()
         elif price == 'no_matter':
             bouquet = Bouquet.objects.filter(reason=reason).order_by('-price').first()
         else:
@@ -107,6 +109,7 @@ def payment_update(request):
         return Response(status=403)
     payment_order = Order.objects.get(yookassa_payment_id=request.data['object']['id'])
     payment_order.is_payed = status
+    payment_order.save()
     return Response()
 
 

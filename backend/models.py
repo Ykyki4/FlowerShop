@@ -113,6 +113,13 @@ class Order(models.Model):
         default=False,
         db_index=True,
     )
+    consultation = models.ForeignKey(
+        'Consultation',
+        related_name='consultations',
+        verbose_name='Констультация',
+        on_delete=models.PROTECT,
+        blank=True,
+    )
 
     class Meta:
         verbose_name = 'Заказ'

@@ -121,6 +121,11 @@ class Order(models.Model):
         blank=True,
         null=True,
     )
+    yookassa_payment_id = models.CharField(
+        'ID платежа Юкасса',
+        max_length=80,
+        blank=True
+    )
 
     class Meta:
         verbose_name = 'Заказ'

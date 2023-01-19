@@ -31,17 +31,23 @@ def quiz(request):
     return render(request, 'backend/quiz.html')
 
 
+@api_view(['POST'])
 def quiz_step(request):
-    request.session['reason'] = request.POST['reason']
+    request.session['reason'] = request.data['reason']
     return render(request, 'backend/quiz-step.html')
 
 
+@api_view(['POST', 'GET'])
 def result(request):
     if request.method == 'POST':
-        if request.POST['price'] == '<1000':
-            bouquet = Bouquet.objects.filter(price__lt=1000, reason=request.session['reason']).first()
+        reason = request.session['reason']
+        price = request.data['price']
+        if price == '<1000':
+            bouquet = Bouquet.objects.filter(price__lt=1000, reason=reason).order_by('-price').first()
+        elif price == 'no_matter':
+            bouquet = Bouquet.objects.filter(reason=reason).order_by('-price').first()
         else:
-            bouquet = Bouquet.objects.filter(price__gt=request.POST['price'], reason=request.session['reason']).first()
+            bouquet = Bouquet.objects.filter(price__gt=price, reason=reason).order_by('-price').first()
     else:
         bouquet = Bouquet.objects.get(id=request.session['bouquet_id'])
 
@@ -82,6 +88,9 @@ def order_register(request):
         'description': f'Заказ №{order_created.id}'
     }, order_created.id)
 
+    order_created.yookassa_payment_id = yoo_payment.id
+    order_created.save()
+
     return redirect(yoo_payment.confirmation.confirmation_url)
 
 
@@ -96,7 +105,7 @@ def payment_update(request):
         status = True
     else:
         return Response(status=403)
-    payment_order = Order.objects.get(id=request.data['object']['id'])
+    payment_order = Order.objects.get(yookassa_payment_id=request.data['object']['id'])
     payment_order.is_payed = status
     return Response()
 

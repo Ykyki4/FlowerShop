@@ -88,6 +88,9 @@ def order_register(request):
         'description': f'Заказ №{order_created.id}'
     }, order_created.id)
 
+    order_created.yookassa_payment_id = yoo_payment.id
+    order_created.save()
+
     return redirect(yoo_payment.confirmation.confirmation_url)
 
 
@@ -102,7 +105,7 @@ def payment_update(request):
         status = True
     else:
         return Response(status=403)
-    payment_order = Order.objects.get(id=request.data['object']['id'])
+    payment_order = Order.objects.get(yookassa_payment_id=request.data['object']['id'])
     payment_order.is_payed = status
     return Response()
 

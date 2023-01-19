@@ -10,7 +10,7 @@ class BouquetAdmin(admin.ModelAdmin):
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     raw_id_fields = ('bouquet',)
-    list_display = ('bouquet', 'client_name', 'phonenumber', 'address', 'delivery_time', 'payed')
+    list_display = ('bouquet', 'client_name', 'phonenumber', 'address', 'delivery_time', 'is_payed')
 
 
 @admin.register(Consultation)

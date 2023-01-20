@@ -18,12 +18,14 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 
-from backend.views import index, catalog, quiz, quiz_step, result, order, order_register, register_consultation, \
-    payment_update
+from backend.views import index, catalog, quiz, quiz_step, result, order
+from backend.views import order_register, register_consultation, card, payment_update
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
+    path('card/<int:bouquet_id>/', card, name='card'),
     path('catalog/', catalog, name='catalog'),
     path('quiz/', quiz, name='quiz'),
     path('quiz-step/', quiz_step, name='quiz-step'),

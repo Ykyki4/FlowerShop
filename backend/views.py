@@ -1,12 +1,16 @@
+from django.shortcuts import render, redirect, get_object_or_404
+from more_itertools import chunked
+
 import uuid
 
-from django.shortcuts import render, redirect
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.serializers import ModelSerializer
 from yookassa import Payment as YooPayment
 
 from backend.models import Bouquet, Order, Consultation
+
+COLUMNS = 3
 
 
 class OrderSerializer(ModelSerializer):
@@ -25,8 +29,15 @@ def index(request):
     return render(request, 'backend/index.html')
 
 
+def card(request, bouquet_id):
+    bouquet = get_object_or_404(Bouquet, pk=bouquet_id)
+    return render(request, 'backend/card.html', {'bouquet': bouquet})
+
+
 def catalog(request):
-    return render(request, 'backend/catalog.html')
+    bouquets = Bouquet.objects.all()
+    chunks = chunked(bouquets, COLUMNS)
+    return render(request, 'backend/catalog.html', context={'bouquets': chunks})
 
 
 def quiz(request):

@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect
+from more_itertools import chunked
 from rest_framework.decorators import api_view
 from rest_framework.serializers import ModelSerializer
 
 from backend.models import Bouquet, Order, Consultation
+
+COLUMNS = 3
 
 
 class OrderSerializer(ModelSerializer):
@@ -22,7 +25,9 @@ def index(request):
 
 
 def catalog(request):
-    return render(request, 'backend/catalog.html')
+    bouquets = Bouquet.objects.all()
+    chunks = chunked(bouquets, COLUMNS)
+    return render(request, 'backend/catalog.html', context={'bouquets': chunks})
 
 
 def quiz(request):

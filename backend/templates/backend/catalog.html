@@ -1,110 +1,79 @@
-{% load static %}
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Flower Shop</title>
-	<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Unbounded:wght@700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="{% static 'backend/css/main.css' %}">
-</head>
-<body>
-	<header id="header">
-		<div class="container">
-			<div class="header ficb">
-				<a href="/"><img src="{% static 'backend/img/logo.svg' %}" alt="logo" class="logo"></a>
-				<nav>
-					<ul class="menu ficc">
-						<li class="menu__item"><a href="{% url 'catalog' %}" class="menu__item_link">Каталог</a></li>
-						<li class="menu__item"><a href="{% url 'index' %}#recommended" class="menu__item_link">Рекомендации</a></li>
-						<li class="menu__item"><a href="{% url 'index' %}#contacts" class="menu__item_link">Контакты</a></li>
-					</ul>
-				</nav>
-			</div>
-		</div>
-	</header>
-	<section id="catalog">
-		<div class="container p100">
-			<div class="catalog">
-				<div class="title">Все букеты</div>
-				<div class="catalog__block">
-					<div class="recommended__elems ficb recommended__elems_first">
-						<div class="recommended__block recommended__block_first">
-							<div class="recommended__block_elems ficb">
-								<span class="recommended__block_intro">Летнее утро</span>
-								<span class="recommended__block_price">3 600 руб</span>
-							</div>
-						</div>
-						<div class="recommended__block recommended__block_sec">
-							<div class="recommended__block_elems ficb">
-								<span class="recommended__block_intro">Пламенный закат</span>
-								<span class="recommended__block_price">3 600 руб</span>
-							</div>
-						</div>
-						<div class="recommended__block recommended__block_thr">
-							<div class="recommended__block_elems ficb">
-								<span class="recommended__block_intro">Осенний</span>
-								<span class="recommended__block_price">3 600 руб</span>
-							</div>
-						</div>
-						
-
-					</div>
-					<div class="recommended__elems ficb recommended__elems_sec">
-						<div class="recommended__block recommended__block_first">
-							<div class="recommended__block_elems ficb">
-								<span class="recommended__block_intro">Полевой</span>
-								<span class="recommended__block_price">1 600 руб</span>
-							</div>
-						</div>
-						<div class="recommended__block recommended__block_sec">
-							<div class="recommended__block_elems ficb">
-								<span class="recommended__block_intro">Весенний</span>
-								<span class="recommended__block_price">3 200 руб</span>
-							</div>
-						</div>
-						<div class="recommended__block recommended__block_thr">
-							<div class="recommended__block_elems ficb">
-								<span class="recommended__block_intro">Нежный</span>
-								<span class="recommended__block_price">2 900 руб</span>
-							</div>
-						</div>
-						
-						
-					</div>
-					<button class="btn largeBtn catalog__btn">Показать ещё</button>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Flower Shop</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Unbounded:wght@700&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="{% static 'backend/css/main.css' %}">
+	</head>
+	<body>
+		<header id="header">
+			<div class="container">
+				<div class="header ficb">
+					<a href="/"><img src="{% static 'backend/img/logo.svg' %}" alt="logo" class="logo"></a>
+					<nav>
+						<ul class="menu ficc">
+							<li class="menu__item"><a href="{% url 'catalog' %}" class="menu__item_link">Каталог</a></li>
+							<li class="menu__item"><a href="{% url 'index' %}#recommended" class="menu__item_link">Рекомендации</a></li>
+							<li class="menu__item"><a href="{% url 'index' %}#contacts" class="menu__item_link">Контакты</a></li>
+						</ul>
+					</nav>
 				</div>
 			</div>
-		</div>
-	</section>
-	<section id="consultation">
-		<div class="container">
-			<div class="consultation">
-				<div class="title consultation__title">Оставьте заявку на консультацию</div>
-				<form action="{% url 'register-consultation' %}" method="post" class="consultation__form">{% csrf_token %}
-					<input type="text" name="client_name" class="consultation__form_input" placeholder="Введите Имя" required>
-					<input type="text" name="phonenumber" class="consultation__form_input" placeholder="+ 7 (999) 000 00 00" required>
-					<button type="submit" class="consultation__form_btn">Отправить</button>
-				</form>
+		</header>
+		<section id="catalog">
+			<div class="container p100">
+				<div class="catalog">
+					<div class="title">Все букеты</div>
+					<div class="catalog__block">
+						{% for chunk in bouquets %}
+							<div class="recommended__elems ficb" >
+								{% for bouquet in chunk %}
+									<a href="#" class="menu__item_link" style="color: #2D2D2D; font-size: 16px;">
+										<div class="recommended__block" style="background-image: url('{{ bouquet.image.url }}');">
+											<div class="recommended__block_elems ficb">
+												<span class="recommended__block_intro">{{ bouquet.title }}</span>
+												<span class="recommended__block_price">{{ bouquet.price | floatformat }} руб</span>
+											</div>
+										</div>
+									</a>
+								{% endfor %}
+							</div>
+						{% endfor %}
+					</div>
+				</div>
 			</div>
-		</div>
-	</section>
-	<footer id="footer">
-		<div class="container">
-			<div class="footer">
-				<a href="/"><img src="{% static 'backend/img/logo.svg' %}" alt="logo" class="logo footer__logo"></a>
-				<nav>
-					<ul class="menu footer__menu ficc">
-						<li class="menu__item"><a href="{% url 'catalog' %}" class="menu__item_link">Каталог</a></li>
-						<li class="menu__item"><a href="{% url 'index' %}#recommended" class="menu__item_link">Рекомендации</a></li>
-						<li class="menu__item"><a href="{% url 'index' %}#contacts" class="menu__item_link">Контакты</a></li>
-					</ul>
-				</nav>
-				<hr class="line"></hr>
-				<a href="#" class="footer__poli">Политика конфиденциальности</a>
-				<p class="footer_cop">©️2022. FlowerShop. Все права защищены</p>
+		</section>
+		<section id="consultation">
+			<div class="container">
+				<div class="consultation">
+					<div class="title consultation__title">Оставьте заявку на консультацию</div>
+					<form action="{% url 'register-consultation' %}" method="post" class="consultation__form">{% csrf_token %}
+						<input type="text" name="client_name" class="consultation__form_input" placeholder="Введите Имя" required>
+						<input type="text" name="phonenumber" class="consultation__form_input" placeholder="+ 7 (999) 000 00 00" required>
+						<button type="submit" class="consultation__form_btn">Отправить</button>
+					</form>
+				</div>
 			</div>
-		</div>
-	</footer>
-</body>
+		</section>
+		<footer id="footer">
+			<div class="container">
+				<div class="footer">
+					<a href="/"><img src="{% static 'backend/img/logo.svg' %}" alt="logo" class="logo footer__logo"></a>
+					<nav>
+						<ul class="menu footer__menu ficc">
+							<li class="menu__item"><a href="{% url 'catalog' %}" class="menu__item_link">Каталог</a></li>
+							<li class="menu__item"><a href="{% url 'index' %}#recommended" class="menu__item_link">Рекомендации</a></li>
+							<li class="menu__item"><a href="{% url 'index' %}#contacts" class="menu__item_link">Контакты</a></li>
+						</ul>
+					</nav>
+					<hr class="line">
+					<a href="#" class="footer__poli">Политика конфиденциальности</a>
+					<p class="footer_cop">©️2022. FlowerShop. Все права защищены</p>
+				</div>
+			</div>
+		</footer>
+	</body>
 </html>

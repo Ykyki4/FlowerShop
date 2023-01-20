@@ -36,12 +36,11 @@
 				<div class="card__block card__block_sec">
 					<div class="title">{{ bouquet.title }}</div>
 					<div class="card__block_price">{{ bouquet.price | floatformat }} руб</div>
+						<span class="card_items_intro">
+							{{ bouquet.description | linebreaks }}
+						</span>
+						<br>
 					<div class="card__elems ">
-						<div class="card__items">
-							<span class="card_items_intro">
-								{{ bouquet.description | linebreaks }}
-							</span>
-						</div>
 						<span class="card__elems_intro">Состав</span>
 						<div class="card__items">
 							<span class="card_items_intro">

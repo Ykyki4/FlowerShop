@@ -33,7 +33,7 @@
 							<span class="card__elems_intro">Описание:</span>
 							<div class="card__items">
 								<p class="card__items_text card__items_text__first">
-									{{ bouquet.description }}
+									{{ bouquet.description | linebreaks }}
 								</p>
 							</div>
 						</div>
@@ -41,16 +41,21 @@
 							<span class="card__elems_intro">Состав:</span>
 							<div class="card__items">
 								<p class="card__items_text card__items_text__first">
-									{{ bouquet.composition }}
+									{{ bouquet.composition | linebreaks }}
 								</p>
 								
 							</div>
 						</div>
 					</div>
-					<img src="{{ bouquet.image.url }}" alt="result Img" class="result__block_img">
+					{% if bouquet.image.url %}
+						<img src="{{ bouquet.image.url }}" alt="result Img" class="result__block_img">
+					{% else %}
+						<img src="{% static 'backend/img/logo.svg' %}" alt="result Img" class="result__block_img">
+					{% endif %}
+
 					<div class="result__items">
 						<div class="title result__items_title">{{ bouquet.title }}</div>
-						<div class="result__items_price">{{ bouquet.price }} руб</div>
+						<div class="result__items_price">{{ bouquet.price | floatformat }} руб</div>
 						<a href="{% url 'order' %}"><button class="btn result__items_btn">Заказать букет</button></a>
 						<hr class="result__items_line" />
 						<div class="result__items_intro">Хотите что-то более специальное?</div>

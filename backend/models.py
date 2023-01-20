@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.core.exceptions import ValidationError
 
 REASON_TYPE = [
     ('wedding', 'Свадьба'),
@@ -162,6 +163,9 @@ class Consultation(models.Model):
         blank=True,
     )
 
+    def clean(self):
+        if self.status == 'rejection' and not self.comment:
+            raise ValidationError("Комментарий не заполнен")
 
     class Meta:
         verbose_name = 'Консультация'

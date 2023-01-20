@@ -28,6 +28,6 @@ class OrderAdmin(admin.ModelAdmin):
 
 @admin.register(Consultation)
 class ConsultationAdmin(admin.ModelAdmin):
-    list_display = ('client_name', 'phonenumber', 'created_at', 'is_closed', 'comment',)
+    list_display = ('client_name', 'phonenumber', 'created_at', 'status', 'comment',)
 
     

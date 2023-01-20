@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from more_itertools import chunked
 from rest_framework.decorators import api_view
 from rest_framework.serializers import ModelSerializer
@@ -22,6 +22,11 @@ class ConsultationSerializer(ModelSerializer):
 
 def index(request):
     return render(request, 'backend/index.html')
+
+
+def card(request, bouquet_id):
+    bouquet = get_object_or_404(Bouquet, pk=bouquet_id)
+    return render(request, 'backend/card.html', {'bouquet': bouquet})
 
 
 def catalog(request):

@@ -3,3 +3,4 @@ environs==9.5.0
 Pillow==9.4.0
 djangorestframework==3.14.0
 yookassa==2.3.3
+more-itertools==9.0.0

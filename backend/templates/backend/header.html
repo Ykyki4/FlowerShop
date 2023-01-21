@@ -1,0 +1,13 @@
+{% load static %}
+<header id="header">
+    <div class="container">
+        <div class="header ficb">
+            <a href="/"><img src="{% static 'backend/img/logo.svg' %}" alt="logo" class="logo"></a>
+            <nav>
+                <ul class="menu ficc">
+                    {% include 'backend/menu.html' %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>

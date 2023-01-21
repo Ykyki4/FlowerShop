@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Flower Shop</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Unbounded:wght@700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'backend/css/main.css' %}">
+</head>
+	<body>
+
+		{% block content %}
+		{% endblock %}
+
+		<footer id="footer">
+			<div class="container">
+				<div class="footer">
+					<a href="/"><img src="{% static 'backend/img/logo.svg' %}" alt="logo" class="logo footer__logo"></a>
+					<nav>
+						<ul class="menu footer__menu ficc">
+							{% include 'backend/menu.html' %}
+						</ul>
+					</nav>
+					<hr class="line">
+					<a href="#" class="footer__poli">Политика конфиденциальности</a>
+					<p class="footer_cop">©️2022. FlowerShop. Все права защищены</p>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>

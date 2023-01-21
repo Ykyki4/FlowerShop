@@ -402,6 +402,10 @@ margin-bottom: 30px;
 
 /*quiz.html*/
 
+.quiz {
+    padding-bottom: 55px;
+}
+
 .arrowLeft {
 	margin-right: 4px;
 }

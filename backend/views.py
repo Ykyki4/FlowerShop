@@ -26,7 +26,12 @@ class ConsultationSerializer(ModelSerializer):
 
 
 def index(request):
-    return render(request, 'backend/index.html')
+    bouquets = Bouquet.objects.order_by('?')[:3]
+    return render(
+        request,
+        'backend/index.html',
+        context={'recommended': bouquets},
+    )
 
 
 def card(request, bouquet_id):

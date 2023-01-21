@@ -66,7 +66,10 @@ def result(request):
     else:
         bouquet = Bouquet.objects.get(id=request.session['bouquet_id'])
 
-    request.session['bouquet_id'] = bouquet.id
+    try:
+        request.session['bouquet_id'] = bouquet.id
+    except AttributeError:
+        return redirect('catalog')
 
     return render(request, 'backend/result.html', {'bouquet': bouquet})
 

@@ -480,19 +480,27 @@ margin-bottom: 30px;
 	height: 8px;
 	position: relative;
 }
-.quiz__progress_lineActive {;
-	position: absolute;
-	background: #17CF97;
-	border-radius: 10px;
-	width: 100%;
-	height: 8px;
-}
-
-.quiz__progress_lineInactive {;
+.quiz__progress_lineEmpty {
 	position: absolute;
 	background: #17CF97;
 	border-radius: 10px;
 	width: 8px;
+	height: 8px;
+}
+
+.quiz__progress_lineHalf {
+	position: absolute;
+	background: #17CF97;
+	border-radius: 10px;
+	width: 50%;
+	height: 8px;
+}
+
+.quiz__progress_lineFull {
+    position: absolute;
+	background: #17CF97;
+	border-radius: 10px;
+	width: 100%;
 	height: 8px;
 }
 

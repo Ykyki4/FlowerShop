@@ -8,6 +8,14 @@ REASON_TYPE = [
     ('no_reason', 'Без повода'),
 ]
 
+COLOR_HYE = [
+    ('pink', 'Розовая'),
+    ('white', 'Белая'),
+    ('red', 'Красная'),
+    ('yellow', 'Жёлтая'),
+    ('purple', 'Фиолетовая'),
+]
+
 DELIVERY_TIME_CHOICES = [
     ('ASAP', 'Как можно скорее'),
     ('10:00-12:00', '10:00-12:00'),
@@ -64,6 +72,13 @@ class Bouquet(models.Model):
     image = models.ImageField(
         'Картинка',
         blank=True,
+    )
+    color_hye = models.CharField(
+        'Цветовая гамма',
+        choices=COLOR_HYE,
+        max_length=15,
+        blank=True,
+        null=True,
     )
 
     class Meta:

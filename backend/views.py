@@ -46,29 +46,40 @@ def catalog(request):
     return render(request, 'backend/catalog.html', context={'bouquets': chunks})
 
 
-def quiz(request):
-    return render(request, 'backend/quiz.html')
+@api_view(['POST', 'GET'])
+def quiz(request, step):
+    if request.data.get('reason'):
+        request.session['reason'] = request.data.get('reason')
+    if request.data.get('price'):
+        request.session['price'] = request.data.get('price')
 
-
-@api_view(['POST'])
-def quiz_step(request):
-    request.session['reason'] = request.data['reason']
-    return render(request, 'backend/quiz-step.html')
+    return render(request, f'backend/quiz-step-{step}.html')
 
 
 @api_view(['POST', 'GET'])
 def result(request):
     if request.method == 'POST':
         reason = request.session['reason']
-        price = request.data['price']
-        if price == '<1000':
-            bouquet = Bouquet.objects.filter(price__lt=1000, reason=reason).order_by('-price').first()
-        elif price == '1000-5000':
-            bouquet = Bouquet.objects.filter(price__gt=1000, price__lt=5000, reason=reason).order_by('-price').first()
-        elif price == 'no_matter':
-            bouquet = Bouquet.objects.filter(reason=reason).order_by('-price').first()
+        price = request.session['price']
+        color_hye = request.data['color_hye']
+        if color_hye != 'no_matter':
+            if price == '<1000':
+                bouquet = Bouquet.objects.filter(price__lt=1000, reason=reason, color_hye=color_hye).order_by('-price').first()
+            elif price == '1000-5000':
+                bouquet = Bouquet.objects.filter(price__gt=1000, price__lt=5000, reason=reason, color_hye=color_hye).order_by('-price').first()
+            elif price == 'no_matter':
+                bouquet = Bouquet.objects.filter(reason=reason, color_hye=color_hye).order_by('-price').first()
+            else:
+                bouquet = Bouquet.objects.filter(price__gt=price, reason=reason, color_hye=color_hye).order_by('-price').first()
         else:
-            bouquet = Bouquet.objects.filter(price__gt=price, reason=reason).order_by('-price').first()
+            if price == '<1000':
+                bouquet = Bouquet.objects.filter(price__lt=1000, reason=reason).order_by('-price').first()
+            elif price == '1000-5000':
+                bouquet = Bouquet.objects.filter(price__gt=1000, price__lt=5000, reason=reason).order_by('-price').first()
+            elif price == 'no_matter':
+                bouquet = Bouquet.objects.filter(reason=reason).order_by('-price').first()
+            else:
+                bouquet = Bouquet.objects.filter(price__gt=price, reason=reason).order_by('-price').first()
     else:
         bouquet = Bouquet.objects.get(id=request.session['bouquet_id'])
 

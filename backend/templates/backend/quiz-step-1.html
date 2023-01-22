@@ -14,7 +14,7 @@
 				</div>
 				<div class="quiz__block">
 					<h1 class="quiz__title">К какому событию нужен букет?</h1>
-					<form action="{% url 'quiz-step' %}" method="post" class="quiz__elems fic">{% csrf_token %}
+					<form action="{% url 'quiz' 2 %}" method="post" class="quiz__elems fic">{% csrf_token %}
 						<button name="reason" value="wedding" class="quiz__elem">Свадьба</button>
 						<button name="reason" value="birthday" class="quiz__elem">День рождения</button>
 						<button name="reason" value="no_reason" class="quiz__elem">Без повода</button>
@@ -23,10 +23,10 @@
 						<div class="quiz__progress_step">
 							<span class="quiz__progress_num">1</span>
 							<span class="quiz__progress_in"> шаг из </span>
-							<span class="quiz__progress_num">2</span>
+							<span class="quiz__progress_num">3</span>
 						</div>
 						<div class="quiz__progress_line">
-							<div class="quiz__progress_lineInactive"></div>
+							<div class="quiz__progress_lineEmpty"></div>
 						</div>
 					</div>
 				</div>

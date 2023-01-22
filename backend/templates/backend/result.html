@@ -36,7 +36,7 @@
 					<div class="result__items">
 						<div class="title result__items_title">{{ bouquet.title }}</div>
 						<div class="result__items_price">{{ bouquet.price | floatformat }} руб</div>
-						<a href="{% url 'order' %}"><button class="btn result__items_btn">Заказать букет</button></a>
+						<a href="{% url 'order-forms' 1 %}"><button class="btn result__items_btn">Заказать букет</button></a>
 						<hr class="result__items_line" />
 						<div class="result__items_intro">Хотите что-то более специальное?</div>
 						<div class="result__items_block">

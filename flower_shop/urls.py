@@ -16,10 +16,10 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
-from backend.views import index, catalog, quiz, quiz_step, result, order
-from backend.views import order_register, register_consultation, card, payment_update
+from backend.views import index, catalog, quiz, quiz_step, result, order_forms
+from backend.views import card, payment_update, yookassa_config
 
 
 urlpatterns = [
@@ -30,8 +30,8 @@ urlpatterns = [
     path('quiz/', quiz, name='quiz'),
     path('quiz-step/', quiz_step, name='quiz-step'),
     path('result/', result, name='result'),
-    path('order/', order, name='order'),
-    path('order-register/', order_register, name='order-register'),
-    path('register-consultation/', register_consultation, name='register-consultation'),
+    path('order/<int:step>/', order_forms, name='order-forms'),
+    path('register/', include('backend.urls')),
     path('payment-update/', payment_update, name='payment-update'),
+    path('yookassa-config/', yookassa_config)
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

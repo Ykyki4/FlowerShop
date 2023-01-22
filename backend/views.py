@@ -1,12 +1,13 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from more_itertools import chunked
-
 import uuid
 
+from django.http import JsonResponse
+from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.serializers import ModelSerializer
-from yookassa import Payment as YooPayment
+from yookassa import Payment as YooPayment, Configuration
+from more_itertools import chunked
 
 from backend.models import Bouquet, Order, Consultation
 
@@ -79,42 +80,56 @@ def result(request):
     return render(request, 'backend/result.html', {'bouquet': bouquet})
 
 
-def order(request):
-    return render(request, 'backend/order.html')
+@api_view(['POST', 'GET'])
+def order_forms(request, step):
+    if step == 1:
+        return render(request, 'backend/order.html')
+    elif step == 2:
+        bouquet = Bouquet.objects.get(id=request.session['bouquet_id'])
+
+        order_serialized = OrderSerializer(data=request.data)
+        order_serialized.is_valid(raise_exception=True)
+
+        order = Order.objects.create(
+            bouquet=bouquet,
+            client_name=order_serialized.validated_data['client_name'],
+            phonenumber=order_serialized.validated_data['phonenumber'],
+            address=order_serialized.validated_data['address'],
+            delivery_time=order_serialized.validated_data['delivery_time'],
+        )
+
+        request.session['order_id'] = order.id
+
+        return render(request, 'backend/order-step.html')
 
 
 @api_view(['POST'])
-def order_register(request):
+def register_order(request):
     bouquet = Bouquet.objects.get(id=request.session['bouquet_id'])
 
-    order_serialized = OrderSerializer(data=request.data)
-    order_serialized.is_valid(raise_exception=True)
-
-    order_created = Order.objects.create(
-        bouquet=bouquet,
-        client_name=order_serialized.validated_data['client_name'],
-        phonenumber=order_serialized.validated_data['phonenumber'],
-        address=order_serialized.validated_data['address'],
-        delivery_time=order_serialized.validated_data['delivery_time'],
-    )
+    order = Order.objects.get(id=request.session['order_id'])
 
     yoo_payment = YooPayment.create({
+        'payment_token': request.data['payment_token'],
         'amount': {
             'value': f'{bouquet.price}',
             'currency': 'RUB'
         },
         'confirmation': {
             'type': 'redirect',
-            'return_url': request.META.get('HTTP_REFERER')
+            'return_url': request.build_absolute_uri(reverse('index'))
         },
         'capture': True,
-        'description': f'Заказ №{order_created.id}'
+        'description': f'Заказ №{order.id}'
     }, str(uuid.uuid4()))
 
-    order_created.yookassa_payment_id = yoo_payment.id
-    order_created.save()
+    order.yookassa_payment_id = yoo_payment.id
+    order.save()
 
-    return redirect(yoo_payment.confirmation.confirmation_url)
+    if yoo_payment.confirmation:
+        return redirect(yoo_payment.confirmation.confirmation_url)
+    else:
+        return redirect('index')
 
 
 @api_view(['POST'])
@@ -145,3 +160,9 @@ def register_consultation(request):
     )
 
     return redirect('index')
+
+
+def yookassa_config(request):
+    if request.method == 'GET':
+        config = {'shop_id': Configuration.account_id}
+        return JsonResponse(config, safe=False)

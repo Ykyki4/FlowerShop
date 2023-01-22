@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from rest_framework.serializers import ModelSerializer
 from yookassa import Payment as YooPayment, Configuration
 from more_itertools import chunked
+from django.template.defaulttags import register
 
 from backend.models import Bouquet, Order, Consultation
 
@@ -166,3 +167,8 @@ def yookassa_config(request):
     if request.method == 'GET':
         config = {'shop_id': Configuration.account_id}
         return JsonResponse(config, safe=False)
+
+
+@register.filter
+def intcomma(value):
+    return value + 1

@@ -110,7 +110,7 @@ class Order(models.Model):
         db_index=True,
     )
     is_delivered = models.BooleanField(
-        'Доставлено',
+        'Выполнен',
         default=False,
         db_index=True,
     )
@@ -118,6 +118,11 @@ class Order(models.Model):
         'ID платежа Юкасса',
         max_length=80,
         blank=True
+    )
+    created_at = models.DateTimeField(
+        'Когда создан заказ',
+        default=timezone.now,
+        db_index=True,
     )
 
     class Meta:
@@ -175,3 +180,17 @@ class Consultation(models.Model):
 
     def __str__(self):
         return f'{self.client_name} в {self.created_at}'
+
+
+class ConsultationSummary(Consultation):
+    class Meta:
+        proxy = True
+        verbose_name = 'Статистика консультации'
+        verbose_name_plural = 'Статистика консультаций'
+
+
+class OrderSummary(Order):
+    class Meta:
+        proxy = True
+        verbose_name = 'Статистика заказа'
+        verbose_name_plural = 'Статистика заказов'

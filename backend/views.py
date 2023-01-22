@@ -28,10 +28,11 @@ class ConsultationSerializer(ModelSerializer):
 
 def index(request):
     bouquets = Bouquet.objects.order_by('?')[:3]
+
     return render(
         request,
         'backend/index.html',
-        context={'recommended': bouquets},
+        context={'recommended': bouquets, 'show_modal': request.GET.get('show_modal', None)}
     )
 
 
@@ -128,7 +129,7 @@ def register_order(request):
         },
         'confirmation': {
             'type': 'redirect',
-            'return_url': request.build_absolute_uri(reverse('index'))
+            'return_url': request.build_absolute_uri(reverse('index'))+'?show_modal=1'
         },
         'capture': True,
         'description': f'Заказ №{order.id}'

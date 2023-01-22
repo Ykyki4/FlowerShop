@@ -4,14 +4,33 @@
 {% block content %}
 	<div class="mainBg">
 
-		{% include 'backend/header.html' %}
+		{% if show_modal %}
+			<div class="modal fade in" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Ваш заказ находится на обработке.</h5>
+					<a href="{% url 'index' %}">
+						<button type="button" class="close" aria-label="Close">
+					  		<span aria-hidden="true">&times;</span>
+						</button>
+					</a>
+				  </div>
+				  <div class="modal-body">
+					Ваш заказ попал к нам, но находится на обработке. Ожидайте.
+				  </div>
+				</div>
+			  </div>
+			</div>
+		{% endif %}
 
+		{% include 'backend/header.html' %}
 		<section id="banner">
 			<div class="container">
 				<div class="banner">
 					<div class="banner__block">
 						<h1 class="banner__title">Мастерская цветов</h1>
-						<p class="banner__text">Подберем для вас букет за два шага, который идеально подойдет под вашу ситуацию</p>
+						<p class="banner__text">Подберем для вас букет за три шага, который идеально подойдет под вашу ситуацию</p>
 						<a href="{% url 'quiz' 1 %}"><button class="btn banner__btn">Подобрать букет</button></a>
 					</div>
 					<img src="{% static 'backend/img/bannerImg.png' %}" alt="banner Img" class="banner__img">
@@ -25,5 +44,13 @@
 	{% include 'backend/contacts.html' %}
 
 	{% include 'backend/consultation.html' %}
+
+
+
+	<script type="text/javascript">
+		$(window).on('load', function() {
+			$('#exampleModal').modal('show');
+		});
+	</script>
 
 {% endblock %}

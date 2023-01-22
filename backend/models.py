@@ -114,14 +114,6 @@ class Order(models.Model):
         default=False,
         db_index=True,
     )
-    consultation = models.ForeignKey(
-        'Consultation',
-        related_name='consultations',
-        verbose_name='Констультация',
-        on_delete=models.PROTECT,
-        blank=True,
-        null=True,
-    )
     yookassa_payment_id = models.CharField(
         'ID платежа Юкасса',
         max_length=80,
@@ -143,6 +135,14 @@ class Consultation(models.Model):
         choices=CONSULTATION_STATUS,
         default='waiting',
         db_index=True,
+    )
+    order = models.ForeignKey(
+        'Order',
+        related_name='orders',
+        verbose_name='Заказ',
+        on_delete=models.PROTECT,
+        blank=True,
+        null=True,
     )
     client_name = models.CharField(
         'ФИО клиента',
@@ -166,6 +166,8 @@ class Consultation(models.Model):
     def clean(self):
         if self.status == 'rejection' and not self.comment:
             raise ValidationError("Комментарий не заполнен")
+        if self.status == 'done' and not self.order:
+            raise ValidationError("Не указан заказ")
 
     class Meta:
         verbose_name = 'Консультация'

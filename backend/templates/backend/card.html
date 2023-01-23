@@ -9,10 +9,10 @@
 		<div class="container">
 			<div class="card ficb">
 				<div class="card__block card__block_first">
-					{% if bouquet.image.url %}
+					{% if bouquet.image %}
 						<img src="{{ bouquet.image.url }}" alt="img" class="card__img">
 					{% else %}
-						<img src="{% static 'backend/img/logo.svg' %}" alt="img" class="card__img">
+						<img src="{% static 'backend/img/default_bouquet.jpg' %}" alt="img" class="card__img">
 					{% endif %}
 				</div>
 				<div class="card__block card__block_sec">

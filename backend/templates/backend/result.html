@@ -28,10 +28,10 @@
 							</div>
 						</div>
 					</div>
-					{% if bouquet.image.url %}
+					{% if bouquet.image %}
 						<img src="{{ bouquet.image.url }}" alt="result Img" class="result__block_img">
 					{% else %}
-						<img src="{% static 'backend/img/logo.svg' %}" alt="result Img" class="result__block_img">
+						<img src="{% static 'backend/img/default_bouquet.jpg' %}" alt="result Img" class="result__block_img">
 					{% endif %}
 					<div class="result__items">
 						<div class="title result__items_title">{{ bouquet.title }}</div>

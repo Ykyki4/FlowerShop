@@ -90,4 +90,5 @@ class OrderSummaryAdmin(admin.ModelAdmin):
     list_filter = (
         'bouquet',
         'is_delivered',
+        'is_payed',
     )
